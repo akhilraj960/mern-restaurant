@@ -1,0 +1,87 @@
+/* General Styles */
+
+/* Styles for the navigation bar */
+.navbar {
+  max-width: 6xl;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 15vh;
+  padding: 3px;
+  z-index: 50;
+  position: sticky;
+  top: 0;
+  /* background-color: #050023; Change this to your desired background color */
+}
+
+/* Styles for the logo */
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: wider;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+
+/* Styles for navigation links and icons */
+.nav-links {
+  display: flex;
+  align-items: center;
+  font-size: 1rem; /* Adjust this to your preferred font size */
+  font-weight: bold;
+  color: #64c064; /* Change this to your desired text color */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 15px; /* Adjust the spacing between links */
+}
+
+.nav-link:hover {
+  color: #64c064; /* Change this to your desired hover color */
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+/* Styles for the shopping cart icon and badge */
+.cart {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -3px;
+  right: -6px;
+  font-size: 0.8rem; /* Adjust the font size of the badge */
+  background-color: #ff0000; /* Change this to your desired badge background color */
+  color: #fff; /* Change this to your desired badge text color */
+  padding: 4px;
+  border-radius: 50%;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px; /* Adjust spacing between links in mobile view */
+  }
+
+  .nav-link.cart {
+    margin-top: 10px; /* Adjust spacing between cart and other links in mobile view */
+  }
+}

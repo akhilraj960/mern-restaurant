@@ -1,0 +1,79 @@
+/* Add your styling here */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-container h1 {
+    font-size: 3em;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    color: #00cc66;
+    margin-bottom: 0.5em;
+  }
+  
+  .form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+  }
+  
+  .form-container input {
+    padding: 0.75em;
+    font-weight: bold;
+    outline: none;
+    border: 2px solid #00cc66;
+    border-radius: 0.25em;
+    background: transparent;
+    width: 300px;
+    text-align: center;
+    font-size: 1em;
+    color: #00cc66;
+  }
+  
+  .form-container input[type="submit"] {
+    background-color: #00cc66;
+    color: #fff;
+    cursor: pointer;
+    transition:0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  
+  .form-container input[type="submit"]:hover {
+    background-color: #f0f0f0;
+    color: #00cc66;
+  }
+  
+  .login-link {
+    margin-top: 1.5em;
+    font-size: 1em;
+    color: white;
+  }
+  
+  .login-link a {
+    color: #00cc66;
+    font-weight: bold;
+    margin-left: 0.5em;
+    text-decoration: none;
+  }
+
+  .image-container {
+    display: none;
+  }
+  
+  .image-container img {
+    height: 400px;
+  }
+  
