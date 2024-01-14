@@ -10,4 +10,10 @@ const allusers = async (req, res) => {
   }
 };
 
-module.exports = { allusers };
+const addcategory = async (req, res) => {
+  console.log(req.body);
+  try {
+  } catch (error) {}
+};
+
+module.exports = { allusers, addcategory };

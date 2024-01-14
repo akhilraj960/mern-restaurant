@@ -11,6 +11,7 @@ const AdminSideBar = () => {
           <Link to={"/admin/food"}>Food</Link>
           <Link to={"/admin/user"}>Users</Link>
           <Link to={"/admin/addfood"}>Add Food</Link>
+          <Link to={"/admin/addcategory"}>Add Category</Link>
         </div>
       </div>
     </>

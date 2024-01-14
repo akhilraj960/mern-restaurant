@@ -10,6 +10,7 @@ import AdminUser from "./pages/AdminPages/AdminUser/AdminUser";
 import AdminLayout from "./pages/AdminPages/AdminLayout/AdminLayout";
 import AddNewFood from "./pages/AdminPages/AddNewFood/AddNewFood";
 import AdminLogin from "./pages/AdminPages/AdminLogin/AdminLogin";
+import AddCategory from "./pages/AdminPages/AddCategory/AddCategory";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/admin/food" element={<AdminFood />} />
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/addfood" element={<AddNewFood />} />
+          <Route path="/admin/addcategory" element={<AddCategory />} />
         </Route>
       </Routes>
     </>
