@@ -1,13 +1,23 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("admin@gmail.com");
+  const [password, setPassword] = useState("admin");
   const [loading, setLoading] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
+  const role = localStorage.getItem("role");
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token && role === "admin") {
+      setIsAdmin(true);
+      navigate("/admin");
+    }
+  }, [navigate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,10 +30,14 @@ const AdminLogin = () => {
       .then((response) => {
         setLoading(false);
         if (response.data.success === true) {
-          console.log(response.data.success);
+          console.log(response.data);
+          alert(response.data.message);
           setEmail("");
           setPassword("");
-          navigate("/");
+          localStorage.setItem("token", response.data.id);
+          localStorage.setItem("role", response.data.role);
+          navigate("/admin");
+          window.location.reload();
         } else {
           alert(response.data.message);
         }

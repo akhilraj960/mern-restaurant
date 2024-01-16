@@ -37,7 +37,8 @@
 
 .nav-link {
   text-decoration: none;
-  color: inherit;
+  color: #64c064; 
+
   cursor: pointer;
   display: flex;
   align-items: center;

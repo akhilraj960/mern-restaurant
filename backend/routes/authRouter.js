@@ -1,3 +1,4 @@
+const AdminModel = require("../models/AdminModel");
 const UserModel = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 
@@ -51,7 +52,7 @@ const login = async (req, res) => {
   }
 };
 
-const adminlogin = (req, res) => {
+const adminlogin = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -60,12 +61,33 @@ const adminlogin = (req, res) => {
       .json({ message: "Invalid email or password", success: false });
   }
 
-  if (email === "admin@gmail.com" && password === "password") {
-    return res.status(200).json({ message: "Login success", success: true });
-  } else {
+  try {
+    const admin = await AdminModel.findOne({ email });
+
+    if (!admin) {
+      return res
+        .status(401)
+        .json({ message: "Admin not found", success: false });
+    }
+
+    if (!password === admin.password) {
+      return res.status(401).json({
+        message: "Invalid password",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: "Login successful",
+      success: true,
+      role: admin.role,
+      id: admin._id,
+    });
+  } catch (error) {
+    console.error(error);
     return res
-      .status(401)
-      .json({ message: "Incorrect email or password", success: false });
+      .status(500)
+      .json({ message: "Internal server error", success: false });
   }
 };
 

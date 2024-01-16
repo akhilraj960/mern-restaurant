@@ -1,5 +1,4 @@
 import React from "react";
-import "./AdminFood.css";
 
 const AdminFood = () => {
   return (
