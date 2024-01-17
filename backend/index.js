@@ -3,7 +3,13 @@ const cors = require("cors");
 const { default: mongoose } = require("mongoose");
 
 const { register, login, adminlogin } = require("./routes/authRouter");
-const { allusers, addcategory, getCategory } = require("./routes/adminRouter");
+const {
+  allusers,
+  addcategory,
+  getCategory,
+  categoryActivate,
+  categoryInActivate,
+} = require("./routes/adminRouter");
 const app = express();
 
 const port = process.env.PORT || 5000;
@@ -29,6 +35,8 @@ app.post("/admin/login", adminlogin);
 app.get("/admin/allusers", allusers);
 app.post("/admin/addcategory", addcategory);
 app.get("/admin/getcategory", getCategory);
+app.put("/admin/activatecategory", categoryActivate);
+app.put("/admin/deactiavtecategory", categoryInActivate);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

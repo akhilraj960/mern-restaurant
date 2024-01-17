@@ -63,9 +63,13 @@ const AddNewFood = () => {
             required
           >
             {category.map((value, index) => (
-              <option key={index} value={value.name}>
-                {value.name}
-              </option>
+              <>
+                {value.status && (
+                  <option key={index} value={value.name}>
+                    {value.name}
+                  </option>
+                )}
+              </>
             ))}
           </select>
         </div>

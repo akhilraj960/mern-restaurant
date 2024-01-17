@@ -34,4 +34,36 @@ const getCategory = async (req, res) => {
   });
 };
 
-module.exports = { allusers, addcategory, getCategory };
+const categoryActivate = async (req, res) => {
+  const id = req.body.id;
+  console.log(id);
+  await CategoryModel.findByIdAndUpdate(
+    id,
+    { $set: { status: true } },
+    { new: true }
+  ).then((data) => {
+    console.log(data);
+    return res.json({ message: "Activated" });
+  });
+};
+
+const categoryInActivate = async (req, res) => {
+  const id = req.body.id;
+  console.log(id);
+  await CategoryModel.findByIdAndUpdate(
+    id,
+    { $set: { status: false } },
+    { new: true }
+  ).then((data) => {
+    console.log(data);
+    return res.json({ message: "DeActivated" });
+  });
+};
+
+module.exports = {
+  allusers,
+  addcategory,
+  getCategory,
+  categoryActivate,
+  categoryInActivate,
+};
