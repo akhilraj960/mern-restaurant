@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const AddNewFood = () => {
   const [formData, setFormData] = useState({
     name: "",
     category: "",
     cost: "",
+    description: "",
+    image: "",
   });
+
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/admin/getcategory")
+      .then((response) => {
+        console.log(response.data);
+        setCategory(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching categories:", error);
+      });
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -16,8 +33,9 @@ const AddNewFood = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can add further processing or send the data to a server here
+    // Log the entire formData object
     console.log("Form submitted:", formData);
+    // You can add further processing or send the data to a server here
   };
 
   return (
@@ -35,18 +53,25 @@ const AddNewFood = () => {
             required
           />
         </div>
+
         <div className="inputcontainer">
           <label htmlFor="category">Category:</label>
-          <input
-            type="text"
+          <select
             name="category"
             value={formData.category}
             onChange={handleChange}
             required
-          />{" "}
+          >
+            {category.map((value, index) => (
+              <option key={index} value={value.name}>
+                {value.name}
+              </option>
+            ))}
+          </select>
         </div>
+
         <div className="inputcontainer">
-          <label htmlFor="category">Cost:</label>
+          <label htmlFor="cost">Price:</label>
           <input
             type="number"
             name="cost"
@@ -55,8 +80,9 @@ const AddNewFood = () => {
             required
           />
         </div>
+
         <div className="inputcontainer">
-          <label htmlFor="cost">Description:</label>
+          <label htmlFor="description">Description:</label>
           <textarea
             name="description"
             value={formData.description}
@@ -65,6 +91,7 @@ const AddNewFood = () => {
             required
           ></textarea>
         </div>
+
         <div className="inputcontainer">
           <label htmlFor="image">Image</label>
           <input

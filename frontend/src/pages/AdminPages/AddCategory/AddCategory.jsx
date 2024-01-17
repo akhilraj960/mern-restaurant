@@ -12,10 +12,10 @@ const AddCategory = () => {
     event.preventDefault();
     setLoading(true);
     axios
-      .post("http://localhost:/admin/addcategory", { category })
+      .post("http://localhost:5000/admin/addcategory", { category })
       .then((data) => {
         setLoading(false);
-        console.log(data);
+        alert(data.data.message);
       });
   };
 

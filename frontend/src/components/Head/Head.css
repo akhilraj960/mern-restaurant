@@ -32,15 +32,17 @@
   align-items: center;
   font-size: 1rem; /* Adjust this to your preferred font size */
   font-weight: bold;
+  gap: 1.6rem;
+  text-decoration: none;
   color: #64c064; /* Change this to your desired text color */
 }
 
-.nav-link {
+.nav-link{
   text-decoration: none;
   color: #64c064; 
-
   cursor: pointer;
   display: flex;
+  text-decoration: none;
   align-items: center;
   margin-right: 15px; /* Adjust the spacing between links */
 }
