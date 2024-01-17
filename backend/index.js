@@ -9,6 +9,7 @@ const {
   getCategory,
   categoryActivate,
   categoryInActivate,
+  addproduct,
 } = require("./routes/adminRouter");
 const app = express();
 
@@ -37,7 +38,10 @@ app.post("/admin/addcategory", addcategory);
 app.get("/admin/getcategory", getCategory);
 app.put("/admin/activatecategory", categoryActivate);
 app.put("/admin/deactiavtecategory", categoryInActivate);
+app.post("/admin/addproduct", addproduct);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
+
+// q27rHCaWt6UKJwdo

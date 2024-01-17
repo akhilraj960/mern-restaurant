@@ -1,4 +1,5 @@
 const CategoryModel = require("../models/CategoryModel");
+const ProductModel = require("../models/ProductModel");
 const UserModel = require("../models/UserModel");
 
 const allusers = async (req, res) => {
@@ -60,10 +61,28 @@ const categoryInActivate = async (req, res) => {
   });
 };
 
+const addproduct = (req, res) => {
+  console.log(req.body);
+
+  const newProduct = new ProductModel({
+    name: req.body.name,
+    category: req.body.category,
+    price: req.body.cost,
+    description: req.body.description,
+  });
+
+  newProduct.save().then((data) => {
+    if (data) {
+      return res.json({ message: "New Product Added" });
+    }
+  });
+};
+
 module.exports = {
   allusers,
   addcategory,
   getCategory,
   categoryActivate,
   categoryInActivate,
+  addproduct,
 };

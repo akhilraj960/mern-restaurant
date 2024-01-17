@@ -16,7 +16,6 @@ const AddNewFood = () => {
     axios
       .get("http://localhost:5000/admin/getcategory")
       .then((response) => {
-        console.log(response.data);
         setCategory(response.data);
       })
       .catch((error) => {
@@ -33,8 +32,16 @@ const AddNewFood = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Log the entire formData object
-    console.log("Form submitted:", formData);
+
+    axios
+      .post("http://localhost:5000/admin/addproduct", formData)
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          alert(data.data.message);
+        }
+      });
+    // console.log("Form submitted:", formData);
     // You can add further processing or send the data to a server here
   };
 
