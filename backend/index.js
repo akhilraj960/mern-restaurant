@@ -17,7 +17,9 @@ const port = process.env.PORT || 5000;
 
 // DataBase Connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/joyel")
+  .connect(
+    "mongodb+srv://resturant:q27rHCaWt6UKJwdo@cluster0.s9tfnhc.mongodb.net/resturanta?retryWrites=true&w=majority"
+  )
   .then(() => {
     console.log("Database Connected");
   })
