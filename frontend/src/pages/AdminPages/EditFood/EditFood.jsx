@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const AddNewFood = () => {
+const EditFood = () => {
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -12,12 +13,31 @@ const AddNewFood = () => {
 
   const [category, setCategory] = useState([]);
 
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/getoneproduct/${id}`)
+      .then((response) => {
+        const { name, category, price, description } = response.data;
+        setFormData((prevData) => ({
+          ...prevData,
+          name,
+          category,
+          cost: price,
+          description,
+        }));
+      })
+      .catch((error) => {
+        console.error("Error fetching product details:", error);
+      });
+  }, [id]);
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/admin/getcategory")
       .then((response) => {
         setCategory(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
@@ -35,19 +55,19 @@ const AddNewFood = () => {
     e.preventDefault();
 
     axios
-      .post("http://localhost:5000/admin/addproduct", formData)
+      .put(`http://localhost:5000/admin/updateproduct/${id}`, formData)
       .then((data) => {
         console.log(data);
-        if (data) {
-          alert(data.data.message);
-        }
+      })
+      .catch((error) => {
+        console.error("Error updating product:", error);
       });
   };
 
   return (
     <div className="addfoodcontainer">
       <form onSubmit={handleSubmit}>
-        <h2>Add Form</h2>
+        <h2>Edit Form</h2>
 
         <div className="inputcontainer">
           <label htmlFor="name">Name:</label>
@@ -68,9 +88,9 @@ const AddNewFood = () => {
             onChange={handleChange}
             required
           >
-            {formData.category === "" && <option>Select Category</option>}
-            {category.map((item, index) => (
-              <option key={index} value={item.value}>
+            <option value="">Select Category</option>
+            {category.map((item) => (
+              <option key={item._id} value={item.name}>
                 {item.name}
               </option>
             ))}
@@ -99,20 +119,23 @@ const AddNewFood = () => {
           ></textarea>
         </div>
 
+        {/* Display current image if available */}
+        {formData.image && (
+          <div className="inputcontainer">
+            <label>Current Image:</label>
+            <img src={formData.image} alt="Current" />
+          </div>
+        )}
+
         <div className="inputcontainer">
           <label htmlFor="image">Image</label>
-          <input
-            type="file"
-            value={formData.image}
-            name="image"
-            onChange={handleChange}
-          />
+          <input type="file" name="image" onInput={handleChange} />
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Update</button>
       </form>
     </div>
   );
 };
 
-export default AddNewFood;
+export default EditFood;

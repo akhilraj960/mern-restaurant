@@ -78,6 +78,33 @@ const addproduct = (req, res) => {
   });
 };
 
+const getAllProduct = async (req, res) => {
+  const product = await ProductModel.find();
+  res.json({ product });
+};
+
+const getOneProduct = async (req, res) => {
+  const { id } = req.params;
+
+  const product = await ProductModel.findById(id);
+
+  res.status(200).json(product);
+};
+
+const updateproduct = async (req, res) => {
+  const { id } = req.params;
+
+
+  const updatedProduct = await ProductModel.findByIdAndUpdate(
+    id,
+    { $set: req.body },
+    { new: true }
+  );
+  res
+    .status(200)
+    .json({ message: "Product updated successfully", updatedProduct });
+};
+
 module.exports = {
   allusers,
   addcategory,
@@ -85,4 +112,7 @@ module.exports = {
   categoryActivate,
   categoryInActivate,
   addproduct,
+  getAllProduct,
+  getOneProduct,
+  updateproduct,
 };

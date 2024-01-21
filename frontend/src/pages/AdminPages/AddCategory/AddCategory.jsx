@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AddCategory = () => {
@@ -18,6 +18,12 @@ const AddCategory = () => {
         alert(data.data.message);
       });
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/admin/getcategory").then((data) => {
+      console.log(data);
+    });
+  }, []);
 
   return (
     <>
