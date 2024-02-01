@@ -63,7 +63,7 @@ const categoryInActivate = async (req, res) => {
 
 const addproduct = (req, res) => {
   console.log(req.body);
-
+  console.log(req.files);
   const newProduct = new ProductModel({
     name: req.body.name,
     category: req.body.category,
@@ -73,7 +73,20 @@ const addproduct = (req, res) => {
 
   newProduct.save().then((data) => {
     if (data) {
-      return res.json({ message: "New Product Added" });
+      const imagePath = `./uploads/${data._id}.jpg`;
+
+      if (req.files.image) {
+        req.files.image.mv(imagePath, (err) => {
+          if (!err) {
+            res.status(201).json({
+              message: "New Product Added Successfully",
+              success: true,
+            });
+          } else {
+            res.status(500).json({ error: "Image upload faild" });
+          }
+        });
+      }
     }
   });
 };
@@ -93,7 +106,6 @@ const getOneProduct = async (req, res) => {
 
 const updateproduct = async (req, res) => {
   const { id } = req.params;
-
 
   const updatedProduct = await ProductModel.findByIdAndUpdate(
     id,

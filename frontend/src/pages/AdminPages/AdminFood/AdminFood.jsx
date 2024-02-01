@@ -21,6 +21,7 @@ const AdminFood = () => {
           <thead>
             <tr>
               <th>No</th>
+              <th>Image</th>
               <th>Name</th>
               <th>Price</th>
               <th>Description</th>
@@ -33,6 +34,15 @@ const AdminFood = () => {
             {product.map((value, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
+                <td>
+                  <a  href={`http://localhost:5000/uploads/${value._id}.jpg`}>
+                    <img
+                      style={{ width: "100px" }}
+                      src={`http://localhost:5000/uploads/${value._id}.jpg`}
+                      alt={value._id}
+                    />
+                  </a>
+                </td>
                 <td>{value.name}</td>
                 <td>{value.price}</td>
                 <td>{value.description}</td>
@@ -40,7 +50,7 @@ const AdminFood = () => {
                 <td></td>
                 <td>
                   <Link
-                    to={`/admin/editfood/${value._id }`}
+                    to={`/admin/editfood/${value._id}`}
                     style={{ color: "Green" }}
                   >
                     Edit

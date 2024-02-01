@@ -1,7 +1,8 @@
 const express = require("express");
+const path = require("path");
 const cors = require("cors");
 const { default: mongoose } = require("mongoose");
-
+const fileUpload = require("express-fileupload");
 const { register, login, adminlogin } = require("./routes/authRouter");
 const {
   allusers,
@@ -33,7 +34,7 @@ mongoose
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(fileUpload());
 // Routes
 app.post("/register", register);
 app.post("/login", login);
@@ -47,6 +48,8 @@ app.post("/admin/addproduct", addproduct);
 app.get("/admin/getallproducts", getAllProduct);
 app.put("/admin/updateproduct/:id", updateproduct);
 app.get("/getoneproduct/:id", getOneProduct);
+
+app.use("/uploads", express.static(path.resolve(__dirname, "uploads")));
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

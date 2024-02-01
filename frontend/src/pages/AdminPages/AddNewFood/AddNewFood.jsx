@@ -7,41 +7,51 @@ const AddNewFood = () => {
     category: "",
     cost: "",
     description: "",
-    image: "",
+    image: null,
   });
 
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/admin/getcategory")
-      .then((response) => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/admin/getcategory"
+        );
         setCategory(response.data);
         console.log(response.data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching categories:", error);
-      });
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: name === "image" ? files[0] : value,
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:5000/admin/addproduct", formData)
-      .then((data) => {
-        console.log(data);
-        if (data) {
-          alert(data.data.message);
-        }
-      });
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/admin/addproduct",
+        formData,
+        { headers: { "content-type": "multipart/form-data" } }
+      );
+      console.log(response);
+      if (response.data) {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error adding product:", error);
+    }
   };
 
   return (
@@ -68,7 +78,7 @@ const AddNewFood = () => {
             onChange={handleChange}
             required
           >
-            {formData.category === "" && <option>Select Category</option>}
+            <option value="">Select Category</option>
             {category.map((item, index) => (
               <option key={index} value={item.value}>
                 {item.name}
@@ -101,12 +111,7 @@ const AddNewFood = () => {
 
         <div className="inputcontainer">
           <label htmlFor="image">Image</label>
-          <input
-            type="file"
-            value={formData.image}
-            name="image"
-            onChange={handleChange}
-          />
+          <input type="file" name="image" onChange={handleChange} />
         </div>
 
         <button type="submit">Submit</button>
