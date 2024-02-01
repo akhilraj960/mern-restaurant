@@ -69,6 +69,7 @@ const addproduct = (req, res) => {
     category: req.body.category,
     price: req.body.cost,
     description: req.body.description,
+    qty: req.body.qty,
   });
 
   newProduct.save().then((data) => {

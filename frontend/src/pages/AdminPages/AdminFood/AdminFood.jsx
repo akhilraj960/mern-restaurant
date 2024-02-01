@@ -24,9 +24,9 @@ const AdminFood = () => {
               <th>Image</th>
               <th>Name</th>
               <th>Price</th>
+              <th>Quantity</th>
               <th>Description</th>
               <th>Category</th>
-              <th>Image</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -35,7 +35,7 @@ const AdminFood = () => {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>
-                  <a  href={`http://localhost:5000/uploads/${value._id}.jpg`}>
+                  <a href={`http://localhost:5000/uploads/${value._id}.jpg`}>
                     <img
                       style={{ width: "100px" }}
                       src={`http://localhost:5000/uploads/${value._id}.jpg`}
@@ -45,9 +45,9 @@ const AdminFood = () => {
                 </td>
                 <td>{value.name}</td>
                 <td>{value.price}</td>
+                <td>{value.qty}</td>
                 <td>{value.description}</td>
                 <td>{value.category}</td>
-                <td></td>
                 <td>
                   <Link
                     to={`/admin/editfood/${value._id}`}

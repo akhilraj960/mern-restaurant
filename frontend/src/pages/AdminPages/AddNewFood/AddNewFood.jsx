@@ -7,6 +7,7 @@ const AddNewFood = () => {
     category: "",
     cost: "",
     description: "",
+    qty:"",
     image: null,
   });
 
@@ -93,6 +94,16 @@ const AddNewFood = () => {
             type="number"
             name="cost"
             value={formData.cost}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="inputcontainer">
+          <label htmlFor="quantity">Quantity:</label>
+          <input
+            type="text"
+            name="qty"
+            value={formData.qty}
             onChange={handleChange}
             required
           />
