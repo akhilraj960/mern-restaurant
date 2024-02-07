@@ -6,8 +6,6 @@ import {
   AdminPanelSettingsOutlined,
   PersonAdd,
   Logout,
-  ShoppingBasket,
-  Menu,
 } from "@mui/icons-material";
 import "./Head.css"; // Import the CSS file
 
@@ -29,6 +27,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.setItem("token", "");
+    localStorage.setItem("name", "");
     localStorage.setItem("role", "");
     window.location.reload();
   };

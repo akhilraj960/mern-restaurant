@@ -11,7 +11,7 @@ const register = (req, res) => {
 
   const user = new UserModel(req.body);
   user.save().then((user) => {
-    res.send("user");
+    res.send(user);
   });
 };
 
@@ -28,9 +28,7 @@ const login = async (req, res) => {
     const user = await UserModel.findOne({ email });
 
     if (user) {
-      const passwordMatch = await bcrypt.compare(password, user.password);
- 
-      if (passwordMatch) {
+      if (user.password === password) {
         return res
           .status(200)
           .send({ user, message: "Login success", success: true });
