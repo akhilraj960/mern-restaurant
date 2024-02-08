@@ -8,6 +8,7 @@ const AdminSideBar = () => {
     <>
       <div className="sidebar">
         <div className="sidebarmenu">
+          <Link to={"/admin/orders"}>Orders</Link>
           <Link to={"/admin/food"}>Food</Link>
           <Link to={"/admin/user"}>Users</Link>
           <Link to={"/admin/addfood"}>Add Food</Link>

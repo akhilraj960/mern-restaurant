@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,6 +21,8 @@ const Register = () => {
       .post("http://localhost:5000/register", {
         name,
         email,
+        phone,
+        address,
         password,
         cPassword,
       })
@@ -43,14 +47,28 @@ const Register = () => {
               name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
+              placeholder="Name"
             />
             <input
               type="email"
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your Email address"
+              placeholder=" Email "
+            />
+            <input
+              type="text"
+              name="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder=" Address"
+            />
+            <input
+              type="number"
+              name="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder=" Phone"
             />
             <input
               type="password"

@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "./Food.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Food = () => {
   const [foods, setFoods] = useState([]);
 
+  const navigate = useNavigate();
+
+  const id = localStorage.getItem("token");
+
   useEffect(() => {
     axios.get("http://localhost:5000/admin/getallproducts").then(({ data }) => {
-      console.log(data.product);
       setFoods(data.product);
-      console.log(foods);
     });
   }, []);
+
+  const handleOrder = (pid) => {
+    if (!id) {
+      alert("Login Please");
+      return;
+    }
+    axios.post(`http://localhost:5000/user/order/${id}/${pid}`).then((data) => {
+      console.log(data);
+    });
+  };
 
   return (
     <div className="foodcontainer">
@@ -25,7 +38,7 @@ const Food = () => {
             <p className="foodtitle">{value.name}</p>
             <p>price: {value.price} Rs</p>
             <p>{value.description}</p>
-            <button>Order Now</button>
+            <button onClick={() => handleOrder(value._id)}>Order Now</button>
           </div>
         ))}
       </div>

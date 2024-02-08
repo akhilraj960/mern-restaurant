@@ -3,10 +3,8 @@ import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cPassword, setCPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -16,19 +14,18 @@ const Login = () => {
     setLoading(true);
     await axios
       .post("http://localhost:5000/login", {
-        name,
         email,
         password,
-        cPassword,
       })
       .then((response) => {
         setLoading(false);
         if (response.data.success === true) {
-          console.log(response.data.success);
-          setName("");
+          alert("Login Successs");
           setEmail("");
           setPassword("");
-          setCPassword("");
+          console.log(response.data);
+          localStorage.setItem("token", response.data.user._id);
+          localStorage.setItem("role", "user");
           navigate("/");
         } else {
           alert(response.data.message);

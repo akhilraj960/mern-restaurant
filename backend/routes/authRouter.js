@@ -34,7 +34,7 @@ const login = async (req, res) => {
           .send({ user, message: "Login success", success: true });
       } else {
         return res
-          .status(401)
+          .status(200)
           .send({ message: "Incorrect email or password", success: false });
       }
     } else {

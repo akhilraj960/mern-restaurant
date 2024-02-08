@@ -1,4 +1,5 @@
 const CategoryModel = require("../models/CategoryModel");
+const OrderModel = require("../models/OrderModel");
 const ProductModel = require("../models/ProductModel");
 const UserModel = require("../models/UserModel");
 
@@ -118,6 +119,31 @@ const updateproduct = async (req, res) => {
     .json({ message: "Product updated successfully", updatedProduct });
 };
 
+const orders = async (req, res) => {
+  const orders = await OrderModel.aggregate([
+    { $match: { status: "pending" } },
+    {
+      $lookup: {
+        from: "products", // Collection to lookup
+        localField: "product", // Field from the OrderModel collection
+        foreignField: "_id", // Field from the products collection
+        as: "product", // Alias for the joined field in the OrderModel documents
+      },
+    },
+    {
+      $lookup: {
+        from: "users", // Collection to lookup
+        localField: "user", // Field from the OrderModel collection
+        foreignField: "_id", // Field from the users collection
+        as: "user", // Alias for the joined field in the OrderModel documents
+      },
+    },
+    { $unwind: "$user" },
+  ]);
+
+  res.status(200).json({ orders, success: true });
+};
+
 module.exports = {
   allusers,
   addcategory,
@@ -128,4 +154,5 @@ module.exports = {
   getAllProduct,
   getOneProduct,
   updateproduct,
+  orders,
 };

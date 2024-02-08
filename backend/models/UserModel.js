@@ -20,6 +20,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "user",
     },
+    phone: {
+      type: Number,
+    },
     address: {
       type: String,
     },

@@ -14,7 +14,10 @@ const {
   getAllProduct,
   getOneProduct,
   updateproduct,
+  orders,
 } = require("./routes/adminRouter");
+
+const { order } = require("./routes/userRouter");
 const app = express();
 
 const port = process.env.PORT || 5000;
@@ -47,7 +50,10 @@ app.put("/admin/deactiavtecategory", categoryInActivate);
 app.post("/admin/addproduct", addproduct);
 app.get("/admin/getallproducts", getAllProduct);
 app.put("/admin/updateproduct/:id", updateproduct);
+app.get("/admin/orders", orders);
+
 app.get("/getoneproduct/:id", getOneProduct);
+app.post("/user/order/:id/:pid", order);
 
 app.use("/uploads", express.static(path.resolve(__dirname, "uploads")));
 
