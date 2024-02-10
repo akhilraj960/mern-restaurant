@@ -30,7 +30,6 @@ const AdminLogin = () => {
       .then((response) => {
         setLoading(false);
         if (response.data.success === true) {
-          console.log(response.data);
           alert(response.data.message);
           setEmail("");
           setPassword("");

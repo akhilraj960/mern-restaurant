@@ -18,6 +18,9 @@ const {
 } = require("./routes/adminRouter");
 
 const { order } = require("./routes/userRouter");
+
+const authRouter = require("./router/authRouter");
+
 const app = express();
 
 const port = process.env.PORT || 5000;
@@ -54,6 +57,8 @@ app.get("/admin/orders", orders);
 
 app.get("/getoneproduct/:id", getOneProduct);
 app.post("/user/order/:id/:pid", order);
+
+app.use("/api/auth", authRouter);
 
 app.use("/uploads", express.static(path.resolve(__dirname, "uploads")));
 

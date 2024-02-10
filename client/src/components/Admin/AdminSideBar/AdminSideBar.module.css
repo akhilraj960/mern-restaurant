@@ -1,0 +1,22 @@
+.sidebar {
+  display: flex;
+  height: 100vh;
+  background-color: #061027;
+  width: 300px;
+}
+
+.menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  margin-left: 2rem;
+}
+
+.menu a {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.851);
+}
