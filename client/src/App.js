@@ -7,6 +7,10 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import AdminLayout from "./pages/Layouts/AdminLayout";
 import AdminLogin from "./pages/AdminPages/AdminLogin/AdminLogin";
 import Foods from "./pages/Foods/Foods";
+import AddFood from "./pages/AdminPages/AddFood/AddFood";
+import NewCategory from "./pages/AdminPages/NewCategory/NewCategory";
+import Category from "./pages/AdminPages/Category/Category";
+import AdminFoods from "./pages/AdminPages/AdminFoods/AdminFoods";
 
 const App = () => {
   return (
@@ -15,12 +19,17 @@ const App = () => {
         <Route path="" element={<HomePage />} />
         <Route path="register" />
         <Route path="login" element={<LoginPage />} />
-        <Route path="foods" element={<Foods />} />    
+        <Route path="foods" element={<Foods />} />
       </Route>
 
       <Route path="/admin/login" element={<AdminLogin />} />
 
-      <Route path="/admin" element={<AdminLayout />}></Route>
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="addfood" element={<AddFood />} />
+        <Route path="addcategory" element={<NewCategory />} />
+        <Route path="category" element={<Category />} />
+        <Route path="food" element={<AdminFoods/>}/>
+      </Route>
     </Routes>
   );
 };

@@ -107,7 +107,11 @@ const allProducts = async (req, res) => {
   const products = await ProductModel.find();
 
   if (products) {
-    return res.send({ message: "Product Fetched Successfully", success: true });
+    return res.send({
+      message: "Product Fetched Successfully",
+      success: true,
+      products,
+    });
   } else {
     return res.send({ message: "Product Fetched Failed", success: false });
   }
@@ -158,6 +162,7 @@ module.exports = {
   activeCategory,
   inactiveCategory,
   newProduct,
+  allProducts,
   getOneProduct,
   updateProduct,
 };
