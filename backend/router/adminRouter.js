@@ -11,7 +11,7 @@ const {
   updateProduct,
 } = require("../controllers/adminController");
 
-// CATEGORY ROUTES
+// CATEGORY ROUTES 
 
 router.post("/newcategory", addcategory);
 router.get("/categories", allcategory);

@@ -66,7 +66,7 @@ const EditFood = () => {
     e.preventDefault();
     setLoading(true);
     axios
-      .post("http://localhost:5000/api/admin/newproduct", formData, {
+      .put(`http://localhost:5000/api/admin/updateproduct/${formData._id}`, formData, {
         headers: { "content-type": "multipart/form-data" },
       })
       .then((response) => {
@@ -155,7 +155,6 @@ const EditFood = () => {
             id="image"
             name="image"
             onChange={handleChange}
-            required
           />
         </div>
         <input
