@@ -7,7 +7,7 @@ const AdminSideBar = () => {
       <div className={styles.menu}>
         <Link to={"/admin/orders"}>Orders</Link>
         <Link to={"/admin/food"}>Food</Link>
-        <Link to={"/admin/user"}>Users</Link>
+        <Link to={"/admin/users"}>Users</Link>
         <Link to={"/admin/category"}>Category</Link>
         <Link to={"/admin/addfood"}>Add Food</Link>
         <Link to={"/admin/addcategory"}>Add Category</Link>

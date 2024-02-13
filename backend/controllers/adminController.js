@@ -123,7 +123,7 @@ const getOneProduct = async (req, res) => {
   const product = await ProductModel.findById(id);
 
   if (product) {
-    return res.send({ message: "Product Fetched Successfully", success: true });
+    return res.send({ message: "Product Fetched Successfully", success: true ,product});
   } else {
     return res.send({ message: "Product Fetched Failed", success: false });
   }

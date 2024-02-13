@@ -9,7 +9,7 @@ const AdminFoods = () => {
     axios.get("http://localhost:5000/api/admin/products").then((response) => {
       setProducts(response.data.products);
     });
-  });
+  },[]);
 
   return (
     <div className={styles.container}>
