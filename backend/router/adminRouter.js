@@ -10,8 +10,9 @@ const {
   getOneProduct,
   updateProduct,
 } = require("../controllers/adminController");
+const { allusers } = require("../routes/adminRouter");
 
-// CATEGORY ROUTES 
+// CATEGORY ROUTES
 
 router.post("/newcategory", addcategory);
 router.get("/categories", allcategory);
@@ -24,5 +25,9 @@ router.post("/newproduct", newProduct);
 router.get("/products", allProducts);
 router.get("/oneproduct/:id", getOneProduct);
 router.put("/updateproduct/:id", updateProduct);
+
+// USER ROUTES
+
+router.get("/users", allusers);
 
 module.exports = router;

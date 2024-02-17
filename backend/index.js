@@ -21,6 +21,7 @@ const { order } = require("./routes/userRouter");
 
 const authRouter = require("./router/authRouter");
 const adminRouter = require("./router/adminRouter");
+const userRouter = require("./router/userRouter");
 
 const app = express();
 
@@ -61,6 +62,7 @@ app.post("/user/order/:id/:pid", order);
 
 app.use("/api/auth", authRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/user", userRouter);
 
 app.use("/uploads", express.static(path.resolve(__dirname, "uploads")));
 

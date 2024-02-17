@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+.content {
+  position: relative;
+}
+
 .content h1 {
   font-size: 1.8rem;
   letter-spacing: 0.05rem;
@@ -27,12 +31,14 @@
 }
 
 .btn {
+  position: absolute;
   padding: 0.75rem;
   border-radius: 0.5rem;
   font-weight: 700;
   letter-spacing: 0.1rem;
   background-color: #d1fae5;
   color: #059669;
+  text-align: center;
   transition-duration: 300ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-property: background-color, border-color, color, fill, stroke,
@@ -44,7 +50,7 @@
   background-color: #34d399;
 }
 
-.image img{
+.image img {
   width: 400px;
   object-fit: fill;
 }

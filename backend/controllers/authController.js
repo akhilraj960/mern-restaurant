@@ -2,9 +2,9 @@ const AdminModel = require("../models/AdminModel");
 const UserModel = require("../models/UserModel");
 
 const register = (req, res) => {
-  const { name, email, password, cPassword } = req.body;
+  const { email, name, phone, address, password } = req.body;
 
-  if (!name || !email || !password || !cPassword) {
+  if (!name || !email || !password || !phone || !address) {
     return res.send({ message: "Fill all the fields", success: false });
   }
 

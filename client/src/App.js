@@ -13,13 +13,15 @@ import Category from "./pages/AdminPages/Category/Category";
 import AdminFoods from "./pages/AdminPages/AdminFoods/AdminFoods";
 import Users from "./pages/AdminPages/Users/Users";
 import EditFood from "./pages/AdminPages/EditFood/EditFood";
+import Orders from "./pages/AdminPages/Orders/Orders";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="" element={<HomePage />} />
-        <Route path="register" />
+        <Route path="register" element={<RegisterPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="foods" element={<Foods />} />
       </Route>
@@ -32,7 +34,8 @@ const App = () => {
         <Route path="category" element={<Category />} />
         <Route path="food" element={<AdminFoods />} />
         <Route path="users" element={<Users />} />
-        <Route path="editfood/:id" element={<EditFood/>}/>
+        <Route path="editfood/:id" element={<EditFood />} />
+        <Route path="orders" element={<Orders />} />
       </Route>
     </Routes>
   );
