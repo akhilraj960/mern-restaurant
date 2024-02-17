@@ -58,7 +58,6 @@ app.put("/admin/updateproduct/:id", updateproduct);
 app.get("/admin/orders", orders);
 
 app.get("/getoneproduct/:id", getOneProduct);
-app.post("/user/order/:id/:pid", order);
 
 app.use("/api/auth", authRouter);
 app.use("/api/admin", adminRouter);

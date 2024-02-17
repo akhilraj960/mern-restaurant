@@ -1,3 +1,4 @@
+const OrderModel = require("../models/OrderModel");
 const ProductModel = require("../models/ProductModel");
 
 const allFoods = async (req, res) => {
@@ -5,4 +6,15 @@ const allFoods = async (req, res) => {
   res.send(foods);
 };
 
-module.exports = { allFoods };
+const order = async (req, res) => {
+  console.log(req.params);
+
+  const { foodId, userId } = req.params;
+
+  const newOrder = new OrderModel({
+    user: userId,
+    product: foodId,
+  });
+};
+
+module.exports = { allFoods, order };

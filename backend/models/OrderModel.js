@@ -14,7 +14,7 @@ const orderSchema = mongoose.Schema(
     price: {
       type: Number,
     },
-    status: {
+    status: { 
       type: String,
       default: "pending",
     },

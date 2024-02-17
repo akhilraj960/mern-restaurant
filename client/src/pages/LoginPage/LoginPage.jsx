@@ -27,6 +27,8 @@ const LoginPage = () => {
       .then((response) => {
         setLoading(false);
 
+        console.log(response.data)
+
         if (response.data.success === true) {
           alert(response.data.message);
           setEmail("");

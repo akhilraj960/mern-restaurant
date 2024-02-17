@@ -1,9 +1,16 @@
 import axios from "axios";
 import styles from "./Foods.module.css";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Foods = () => {
   const [foods, setFoods] = useState([]);
+
+  const navigate = useNavigate();
+
+  const id = localStorage.getItem("token");
+
+  console.log(id);
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/user/foods").then((response) => {
@@ -12,7 +19,17 @@ const Foods = () => {
     });
   }, []);
 
-  console.log(foods);
+  const handleOrder = (pid) => {
+    if (!id) {
+      alert("Login Please");
+      return;
+    }
+    axios
+      .post(`http://localhost:5000/api/user/order/${pid}/${id}`)
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
   return (
     <div className={styles.container}>
@@ -32,8 +49,12 @@ const Foods = () => {
                 <p>{value.category}</p>
                 <p>{value.description}</p>
               </div>
-              <button className={styles.btn}>Order Now</button>
-
+              <button
+                onClick={() => handleOrder(value._id)}
+                className={styles.btn}
+              >
+                Order Now
+              </button>
             </div>
           );
         })}

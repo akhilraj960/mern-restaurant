@@ -28,7 +28,7 @@ const login = async (req, res) => {
   }
 
   if (user.password === password) {
-    return res.send({ message: "Login Success", success: true });
+    return res.send({ message: "Login Success", success: true, id: user._id });
   } else {
     return res.send({ message: "Incorrect email or password", success: false });
   }
