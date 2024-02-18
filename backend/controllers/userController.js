@@ -15,6 +15,10 @@ const order = async (req, res) => {
     user: userId,
     product: foodId,
   });
+
+  newOrder.save().then((data) => {
+    res.send({ message: "Order Successfully" });
+  });
 };
 
 module.exports = { allFoods, order };

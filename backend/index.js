@@ -3,21 +3,7 @@ const path = require("path");
 const cors = require("cors");
 const { default: mongoose } = require("mongoose");
 const fileUpload = require("express-fileupload");
-const { register, login, adminlogin } = require("./routes/authRouter");
-const {
-  allusers,
-  addcategory,
-  getCategory,
-  categoryActivate,
-  categoryInActivate,
-  addproduct,
-  getAllProduct,
-  getOneProduct,
-  updateproduct,
-  orders,
-} = require("./routes/adminRouter");
 
-const { order } = require("./routes/userRouter");
 
 const authRouter = require("./router/authRouter");
 const adminRouter = require("./router/adminRouter");
@@ -43,30 +29,15 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(fileUpload());
-// Routes
-app.post("/register", register);
-app.post("/login", login);
-app.post("/admin/login", adminlogin);
-app.get("/admin/allusers", allusers);
-app.post("/admin/addcategory", addcategory);
-app.get("/admin/getcategory", getCategory);
-app.put("/admin/activatecategory", categoryActivate);
-app.put("/admin/deactiavtecategory", categoryInActivate);
-app.post("/admin/addproduct", addproduct);
-app.get("/admin/getallproducts", getAllProduct);
-app.put("/admin/updateproduct/:id", updateproduct);
-app.get("/admin/orders", orders);
 
-app.get("/getoneproduct/:id", getOneProduct);
+// Routes
 
 app.use("/api/auth", authRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/user", userRouter);
 
 app.use("/uploads", express.static(path.resolve(__dirname, "uploads")));
-
+ 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
-
-// q27rHCaWt6UKJwdo

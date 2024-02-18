@@ -9,8 +9,8 @@ const {
   allProducts,
   getOneProduct,
   updateProduct,
+  allusers,
 } = require("../controllers/adminController");
-const { allusers } = require("../routes/adminRouter");
 
 // CATEGORY ROUTES
 
