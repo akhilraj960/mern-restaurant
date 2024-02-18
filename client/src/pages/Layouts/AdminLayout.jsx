@@ -5,14 +5,15 @@ import AdminSideBar from "../../components/Admin/AdminSideBar/AdminSideBar";
 
 const AdminLayout = () => {
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
+    if (!token || role !== "admin") {
       navigate("/admin/login");
     }
-  }, [token,navigate]);
+  }, [token, role, navigate]);
 
   return (
     <>

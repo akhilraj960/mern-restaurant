@@ -10,6 +10,7 @@ const {
   getOneProduct,
   updateProduct,
   allusers,
+  allOrders,
 } = require("../controllers/adminController");
 
 // CATEGORY ROUTES
@@ -29,5 +30,9 @@ router.put("/updateproduct/:id", updateProduct);
 // USER ROUTES
 
 router.get("/users", allusers);
+
+// ORDER ROUTES
+
+router.get("/orders", allOrders);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const CategoryModel = require("../models/CategoryModel");
+const OrderModel = require("../models/OrderModel");
 const ProductModel = require("../models/ProductModel");
 const UserModel = require("../models/UserModel");
 
@@ -123,7 +124,11 @@ const getOneProduct = async (req, res) => {
   const product = await ProductModel.findById(id);
 
   if (product) {
-    return res.send({ message: "Product Fetched Successfully", success: true ,product});
+    return res.send({
+      message: "Product Fetched Successfully",
+      success: true,
+      product,
+    });
   } else {
     return res.send({ message: "Product Fetched Failed", success: false });
   }
@@ -151,6 +156,68 @@ const updateProduct = async (req, res) => {
 
 // ORDER SECTION STARTS
 
+// const allOrders = (req, res) => {
+//   ProductModel.aggregate([
+//     {
+//       $match: {
+//         $ne: ["delivered"],
+//       },
+//     },
+//   ]).then((response) => {
+//     console.log(response);
+//   });
+// };
+
+const allOrders = (req, res) => {
+  OrderModel.aggregate([
+    {
+      $match: {
+        status: { $ne: "delivered" }, // Match orders where status is not "delivered"
+      },
+    },
+    {
+      $lookup: {
+        from: "users", // Assuming your User collection is named "users"
+        localField: "user",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    {
+      $lookup: {
+        from: "products", // Assuming your User collection is named "users"
+        localField: "product",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+    {
+      $unwind: "$user", // Unwind the user array
+    },
+    {
+      $unwind: "$product", // Unwind the user array
+    },
+    {
+      $project: {
+        _id: 1,
+        "user.name": 1,
+        "user.address": 1,
+        "user.phone": 1,
+        "product._id": 1,
+        "product.name": 1,
+      },
+    },
+  ])
+    .then((response) => {
+      console.log(response);
+      res.json(response); // Send the response back to the client
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ error: "An error occurred" });
+    });
+};
+
 // ORDER SECTION ENDS
 
 // -------------------------------- //
@@ -165,4 +232,5 @@ module.exports = {
   allProducts,
   getOneProduct,
   updateProduct,
+  allOrders,
 };

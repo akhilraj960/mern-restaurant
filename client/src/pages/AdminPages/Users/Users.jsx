@@ -7,7 +7,8 @@ const Users = () => {
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/admin/users").then((response) => {
-      setUsers(response.data);
+      setUsers(response.data.users);
+       console.log(response.data)
     });
   }, []);
 

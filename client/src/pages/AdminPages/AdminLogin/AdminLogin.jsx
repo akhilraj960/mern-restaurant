@@ -15,7 +15,8 @@ const AdminLogin = () => {
     if (token && role === "admin") {
       navigate("/admin");
     }
-  }, [navigate,token,role]);
+    console.log(role);
+  }, [navigate, token, role]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ const AdminLogin = () => {
           setEmail("");
           setPassword("");
           localStorage.setItem("token", response.data.id);
-          localStorage.setItem("role", response.data.role);
+          localStorage.setItem("role", "admin");
           navigate("/admin");
         } else {
           setLoading(false);
