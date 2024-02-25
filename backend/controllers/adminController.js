@@ -143,9 +143,20 @@ const updateProduct = async (req, res) => {
     { new: true }
   ).then((data) => {
     if (data) {
-      return res.send({ message: "Product Updated", success: true });
+      const imagePath = `./uploads/${data._id}.jpg`;
+
+      if (req.files.image) {
+        req.files.image.mv(imagePath, (err) => {
+          return res.send({
+            message: "Product Updated Successfully",
+            success: true,
+          });
+        });
+      } else {
+        return res.send({ message: "Image Upload failed" });
+      }
     } else {
-      return res.send({ message: "Product Updation Failed", success: false });
+      return res.send({ message: "Product Updated failed", success: false });
     }
   });
 };
@@ -155,18 +166,6 @@ const updateProduct = async (req, res) => {
 // -------------------------------- //
 
 // ORDER SECTION STARTS
-
-// const allOrders = (req, res) => {
-//   ProductModel.aggregate([
-//     {
-//       $match: {
-//         $ne: ["delivered"],
-//       },
-//     },
-//   ]).then((response) => {
-//     console.log(response);
-//   });
-// };
 
 const allOrders = (req, res) => {
   OrderModel.aggregate([

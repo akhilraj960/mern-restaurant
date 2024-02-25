@@ -24,11 +24,10 @@ const Foods = () => {
       alert("Login Please");
       return;
     }
-    axios
-      .post(`http://localhost:5000/api/user/order/${pid}/${id}`)
-      .then((data) => {
-        console.log(data);
-      });
+
+    navigate(`/address/${pid}`);
+
+    
   };
 
   return (

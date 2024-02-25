@@ -15,6 +15,7 @@ import Users from "./pages/AdminPages/Users/Users";
 import EditFood from "./pages/AdminPages/EditFood/EditFood";
 import Orders from "./pages/AdminPages/Orders/Orders";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import AddressPage from "./pages/AddressPage/AddressPage";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="register" element={<RegisterPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="foods" element={<Foods />} />
+        <Route path="address/:pid" element={<AddressPage />} />
       </Route>
 
       <Route path="/admin/login" element={<AdminLogin />} />

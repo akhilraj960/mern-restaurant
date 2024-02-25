@@ -11,12 +11,18 @@ const orderSchema = mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Product",
     },
-    price: {
-      type: Number,
-    },
-    status: { 
+    status: {
       type: String,
       default: "pending",
+    },
+    address: {
+      type: String,
+    },
+    landmark: {
+      type: String,
+    },
+    phone: {
+      type: String,
     },
   },
   { timestamps: true }

@@ -7,13 +7,16 @@ const allFoods = async (req, res) => {
 };
 
 const order = async (req, res) => {
-  console.log(req.params);
+  const { address, landmark, phone } = req.body;
 
   const { foodId, userId } = req.params;
 
   const newOrder = new OrderModel({
     user: userId,
     product: foodId,
+    address: address,
+    landmark: landmark,
+    phone: phone,
   });
 
   newOrder.save().then((data) => {
