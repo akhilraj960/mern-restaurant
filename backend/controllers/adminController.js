@@ -196,16 +196,7 @@ const allOrders = (req, res) => {
     {
       $unwind: "$product", // Unwind the user array
     },
-    {
-      $project: {
-        _id: 1,
-        "user.name": 1,
-        "user.address": 1,
-        "user.phone": 1,
-        "product._id": 1,
-        "product.name": 1,
-      },
-    },
+  
   ])
     .then((response) => {
       console.log(response);
