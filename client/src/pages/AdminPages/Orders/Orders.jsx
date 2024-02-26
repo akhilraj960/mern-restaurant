@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Order.module.css";
 import axios from "axios";
 const Orders = () => {
+  const [reload, setReload] = useState(false);
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:5000/api/admin/orders").then((data) => {
@@ -10,7 +11,13 @@ const Orders = () => {
     });
   }, []);
 
-  const handleSubmit = () => {};
+  const handleSubmit = (id) => {
+    axios
+      .put(`http://localhost:5000/api/admin/order/status/${id}`)
+      .then((data) => {
+        setReload((prev) => !prev);
+      });
+  };
 
   return (
     <div className={styles.container}>

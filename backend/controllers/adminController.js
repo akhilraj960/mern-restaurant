@@ -196,7 +196,6 @@ const allOrders = (req, res) => {
     {
       $unwind: "$product", // Unwind the user array
     },
-  
   ])
     .then((response) => {
       console.log(response);
@@ -205,6 +204,22 @@ const allOrders = (req, res) => {
     .catch((error) => {
       console.error(error);
       res.status(500).json({ error: "An error occurred" });
+    });
+};
+
+const statusDelivered = (req, res) => {
+  const { id } = req.params;
+
+  console.log(id);
+
+  OrderModel.findByIdAndUpdate(id, { status: "delivered" }, { new: true })
+    .then((data) => {
+      res
+        .status(200)
+        .json({ message: "product delivered", success: true, data });
+    })
+    .catch((error) => {
+      console.log(error);
     });
 };
 
@@ -223,4 +238,5 @@ module.exports = {
   getOneProduct,
   updateProduct,
   allOrders,
+  statusDelivered,
 };
