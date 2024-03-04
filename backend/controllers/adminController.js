@@ -179,15 +179,8 @@ const allOrders = (req, res) => {
     {
       $lookup: {
         from: "products", // Assuming your Product collection is named "products"
-        pipeline: [
-          {
-            $match: {
-              status: {
-                $ne: "delivered",
-              },
-            },
-          },
-        ],
+        localField: "product",
+        foreignField: "_id",
         as: "product",
       },
     },
@@ -203,7 +196,6 @@ const allOrders = (req, res) => {
     // Additional stages can be added here if needed
   ])
     .then((response) => {
-      console.log(response);
       res.json(response); // Send the response back to the client
     })
     .catch((error) => {

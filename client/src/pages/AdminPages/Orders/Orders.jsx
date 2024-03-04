@@ -9,7 +9,7 @@ const Orders = () => {
       console.log(data.data);
       setOrders(data.data);
     });
-  }, []);
+  }, [reload]);
 
   const handleSubmit = (id) => {
     axios
@@ -32,6 +32,7 @@ const Orders = () => {
             <th>Phone</th>
             <th>Address</th>
             <th>Landmark</th>
+            <th>Quantity</th>
             <th>Item </th>
             <th>Action </th>
           </tr>
@@ -45,6 +46,7 @@ const Orders = () => {
                 <td>{value.phone}</td>
                 <td>{value.address}</td>
                 <td>{value.landmark}</td>
+                <td>{value.quantity}</td>
                 <td className={styles.tableproductcontainer}>
                   {value.product.map((value, index) => {
                     return (

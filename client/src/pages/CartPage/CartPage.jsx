@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const CartPage = () => {
   const [items, setItems] = useState([]);
-  const [qty, setQty] = useState();
-
+  const [qty, setQty] = useState("quarter");
+  const [reload, setReload] = useState(false);
   const token = localStorage.getItem("token");
 
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const CartPage = () => {
         setItems(response.data.response);
         console.log(response.data.response[0]);
       });
-  }, [token, navigate]);
+  }, [token, navigate, reload]);
 
   const handleOrder = (pid) => {
     if (!token) {
@@ -33,7 +33,14 @@ const CartPage = () => {
     navigate(`/address/${pid}/${qty}`);
   };
 
-  const handleRemove = () => {};
+  const handleRemove = (id) => {
+    axios
+      .delete(`http://localhost:5000/api/user/removecart/${id}`)
+      .then((data) => {
+        setReload((pre) => !pre);
+        alert(data.data.message);
+      });
+  };
 
   return (
     <div className={styles.container}>
@@ -52,6 +59,7 @@ const CartPage = () => {
               <div className={styles.contentcontainer}>
                 <h3>{value.product.category}</h3>
                 <h2>{value.product.name}</h2>
+                <h2>price : {value.product.price}/-</h2>
                 <p>{value.product.description}</p>
               </div>
               <select onChange={(e) => setQty(e.target.value)}>
@@ -62,7 +70,7 @@ const CartPage = () => {
               <div className={styles.btncontainer}>
                 <button
                   onClick={() => {
-                    handleOrder(value._id);
+                    handleOrder(value.product._id);
                   }}
                 >
                   Order Now

@@ -9,7 +9,7 @@ const allFoods = async (req, res) => {
 };
 
 const order = async (req, res) => {
-  const { address, landmark, phone } = req.body;
+  const { address, landmark, phone, qty } = req.body;
 
   const { foodId, userId } = req.params;
 
@@ -21,10 +21,11 @@ const order = async (req, res) => {
     address: address,
     landmark: landmark,
     phone: phone,
+    quantity: qty,
   });
 
   newOrder.save().then((data) => {
-    console.log(data)
+    console.log(data);
     res.send({ message: "Order Successfully" });
   });
 };

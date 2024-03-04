@@ -8,7 +8,7 @@ const AddressPage = () => {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { pid } = useParams();
+  const { pid, qty } = useParams();
   const id = localStorage.getItem("token");
 
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const AddressPage = () => {
         address,
         landmark,
         phone,
+        qty,
       })
       .then((data) => {
         setLoading(false);
