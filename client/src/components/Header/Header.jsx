@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const token = localStorage.getItem("token");
+
 
   useEffect(() => {
     if (token) {
@@ -15,7 +16,7 @@ const Header = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.clear('token')
+    localStorage.clear("token");
     setIsLoggedIn(false);
   };
 
@@ -31,6 +32,9 @@ const Header = () => {
         </Link>
         <Link to="/foods" className={styles.navlink}>
           Explore
+        </Link>
+        <Link to="/cart" className={styles.navlink}>
+          Cart
         </Link>
         {!isLoggedIn ? (
           <Link to="/login" className={styles.navlink}>

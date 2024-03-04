@@ -11,6 +11,10 @@ const orderSchema = mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "Product",
     },
+    quantity: {
+      type: String,
+      default: 1,
+    },
     status: {
       type: String,
       default: "pending",

@@ -16,6 +16,7 @@ import EditFood from "./pages/AdminPages/EditFood/EditFood";
 import Orders from "./pages/AdminPages/Orders/Orders";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import AddressPage from "./pages/AddressPage/AddressPage";
+import CartPage from "./pages/CartPage/CartPage";
 
 const App = () => {
   return (
@@ -25,7 +26,8 @@ const App = () => {
         <Route path="register" element={<RegisterPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="foods" element={<Foods />} />
-        <Route path="address/:pid" element={<AddressPage />} />
+        <Route path="address/:pid/:qty" element={<AddressPage />} />
+        <Route path="cart" element={<CartPage />} />
       </Route>
 
       <Route path="/admin/login" element={<AdminLogin />} />

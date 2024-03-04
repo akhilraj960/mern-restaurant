@@ -1,0 +1,39 @@
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  color: white;
+}
+
+.cardcontainer {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.imgcontainer img {
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.contentcontainer {
+  width: 200px;
+}
+
+.btncontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pricecontainer{
+  margin: 2rem;
+  padding: 2rem;
+}

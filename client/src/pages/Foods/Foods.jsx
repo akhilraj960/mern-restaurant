@@ -10,8 +10,6 @@ const Foods = () => {
 
   const id = localStorage.getItem("token");
 
-  console.log(id);
-
   useEffect(() => {
     axios.get("http://localhost:5000/api/user/foods").then((response) => {
       console.log(response.data);
@@ -19,15 +17,26 @@ const Foods = () => {
     });
   }, []);
 
-  const handleOrder = (pid) => {
+  // const handleOrder = (pid) => {
+  //   if (!id) {
+  //     alert("Login Please");
+  //     return;
+  //   }
+
+  //   navigate(`/address/${pid}`);
+
+  // };
+
+  const handleCart = (pid) => {
     if (!id) {
       alert("Login Please");
       return;
     }
-
-    navigate(`/address/${pid}`);
-
-    
+    axios
+      .post(`http://localhost:5000/api/user/addcart/${pid}/${id}`)
+      .then((response) => {
+        alert("added to cart");
+      });
   };
 
   return (
@@ -35,7 +44,7 @@ const Foods = () => {
       <div className={styles.cardwrapper}>
         {foods.map((value, index) => {
           return (
-            <div className={styles.card}>
+            <div key={index} className={styles.card}>
               <div className={styles.imgcontainer}>
                 <img
                   src={`http://localhost:5000/uploads/${value._id}.jpg`}
@@ -47,12 +56,13 @@ const Foods = () => {
                 <p>{value.name}</p>
                 <p>{value.category}</p>
                 <p>{value.description}</p>
+                <p>Rs {value.price}/-</p>
               </div>
               <button
-                onClick={() => handleOrder(value._id)}
+                onClick={() => handleCart(value._id)}
                 className={styles.btn}
               >
-                Order Now
+                Add To Cart
               </button>
             </div>
           );

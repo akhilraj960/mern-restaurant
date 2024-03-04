@@ -184,18 +184,13 @@ const allOrders = (req, res) => {
     },
     {
       $lookup: {
-        from: "products", // Assuming your User collection is named "users"
+        from: "products", // Assuming your Product collection is named "products"
         localField: "product",
         foreignField: "_id",
         as: "product",
       },
     },
-    {
-      $unwind: "$user", // Unwind the user array
-    },
-    {
-      $unwind: "$product", // Unwind the user array
-    },
+    // Additional stages can be added here if needed
   ])
     .then((response) => {
       console.log(response);
@@ -206,6 +201,7 @@ const allOrders = (req, res) => {
       res.status(500).json({ error: "An error occurred" });
     });
 };
+
 
 const statusDelivered = (req, res) => {
   const { id } = req.params;
