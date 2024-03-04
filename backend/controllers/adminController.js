@@ -171,7 +171,24 @@ const allOrders = (req, res) => {
   OrderModel.aggregate([
     {
       $match: {
-        status: { $ne: "delivered" }, // Match orders where status is not "delivered"
+        status: {
+          $ne: "delivered",
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: "products", // Assuming your Product collection is named "products"
+        pipeline: [
+          {
+            $match: {
+              status: {
+                $ne: "delivered",
+              },
+            },
+          },
+        ],
+        as: "product",
       },
     },
     {
@@ -182,14 +199,7 @@ const allOrders = (req, res) => {
         as: "user",
       },
     },
-    {
-      $lookup: {
-        from: "products", // Assuming your Product collection is named "products"
-        localField: "product",
-        foreignField: "_id",
-        as: "product",
-      },
-    },
+
     // Additional stages can be added here if needed
   ])
     .then((response) => {
@@ -201,7 +211,6 @@ const allOrders = (req, res) => {
       res.status(500).json({ error: "An error occurred" });
     });
 };
-
 
 const statusDelivered = (req, res) => {
   const { id } = req.params;

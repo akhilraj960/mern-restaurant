@@ -6,3 +6,17 @@
   text-align: center;
   color: white;
 }
+
+.tableproduct{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid white;
+  padding: 6px;
+}
+
+.tableproductcontainer{
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}

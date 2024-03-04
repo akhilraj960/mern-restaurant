@@ -16,6 +16,8 @@ const Orders = () => {
       .put(`http://localhost:5000/api/admin/order/status/${id}`)
       .then((data) => {
         setReload((prev) => !prev);
+        console.log(data);
+        alert(data.data.message);
       });
   };
 
@@ -39,11 +41,25 @@ const Orders = () => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{value.user.name}</td>
+                <td>{value.user[0].name}</td>
                 <td>{value.phone}</td>
                 <td>{value.address}</td>
                 <td>{value.landmark}</td>
-                <td>{value.product.name}</td>
+                <td className={styles.tableproductcontainer}>
+                  {value.product.map((value, index) => {
+                    return (
+                      <div className={styles.tableproduct} key={index}>
+                        <img
+                          style={{ width: "50px" }}
+                          src={`http://localhost:5000/uploads/${value._id}.jpg`}
+                          alt={value._id}
+                        />
+                        <p>{value.name}</p>
+                        <p>{value.category}</p>
+                      </div>
+                    );
+                  })}
+                </td>
                 <td>
                   <button onClick={() => handleSubmit(value._id)}>
                     Delivered
